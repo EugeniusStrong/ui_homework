@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
 
+const Color kPrimaryColor = Colors.red;
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -9,9 +11,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.red,
+        backgroundColor: kPrimaryColor,
         appBar: AppBar(
-          backgroundColor: Colors.red,
+          backgroundColor: kPrimaryColor,
           title: const Text(
             'Whether forecast',
           ),
@@ -32,16 +34,24 @@ Widget _buildBody() {
           children: [
             _searchCity(),
             _cityDetail(),
-            const Padding(padding: EdgeInsets.only(bottom: 40)),
+            const SizedBox(
+              height: 40,
+            ),
             _temperatureDetail(),
-            const Padding(padding: EdgeInsets.only(bottom: 40)),
+            const SizedBox(
+              height: 40,
+            ),
             _weatherDetail(),
-            const Padding(padding: EdgeInsets.only(bottom: 60)),
+            const SizedBox(
+              height: 60,
+            ),
             const Text(
               '7-DAY WEATHER FORECAST',
               style: TextStyle(fontSize: 20, color: Colors.white),
             ),
-            const Padding(padding: EdgeInsets.only(bottom: 20)),
+            const SizedBox(
+              height: 20,
+            ),
             const BodyListView()
           ],
         ),
@@ -51,8 +61,8 @@ Widget _buildBody() {
 }
 
 Row _searchCity() {
-  return Row(
-    children: const [
+  return const Row(
+    children: [
       Icon(
         Icons.search,
         color: Colors.white,
@@ -67,10 +77,12 @@ Row _searchCity() {
 }
 
 Column _cityDetail() {
-  return Column(
+  return const Column(
     crossAxisAlignment: CrossAxisAlignment.center,
-    children: const [
-      Padding(padding: EdgeInsets.all(16)),
+    children: [
+      SizedBox(
+        height: 40,
+      ),
       Text(
         'Lipetskaya Oblast,RU',
         style: TextStyle(fontSize: 36, color: Colors.white),
@@ -85,10 +97,10 @@ Column _cityDetail() {
 }
 
 Row _temperatureDetail() {
-  return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+  return const Row(mainAxisAlignment: MainAxisAlignment.center, children: [
     Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: const [
+      children: [
         Icon(
           Icons.wb_sunny,
           color: Colors.white,
@@ -103,7 +115,7 @@ Row _temperatureDetail() {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Row(
-          children: const [
+          children: [
             Text(
               '16 °C',
               style: TextStyle(color: Colors.white, fontSize: 50),
@@ -111,7 +123,7 @@ Row _temperatureDetail() {
           ],
         ),
         Row(
-          children: const [
+          children: [
             Text(
               'CLEAR',
               style: TextStyle(color: Colors.white, fontSize: 20),
@@ -124,9 +136,9 @@ Row _temperatureDetail() {
 }
 
 Row _weatherDetail() {
-  return Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+  return const Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
     Column(
-      children: const [
+      children: [
         Icon(
           Icons.air,
           size: 30,
@@ -148,7 +160,7 @@ Row _weatherDetail() {
       ],
     ),
     Column(
-      children: const [
+      children: [
         Icon(
           Icons.cloudy_snowing,
           size: 30,
@@ -170,7 +182,7 @@ Row _weatherDetail() {
       ],
     ),
     Column(
-      children: const [
+      children: [
         Icon(
           Icons.water_drop,
           size: 30,
@@ -199,7 +211,7 @@ class BodyListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _myListView();
+    return _buildListView();
   }
 }
 
@@ -213,35 +225,39 @@ enum DaysWeek {
   sunday,
 }
 
-Widget _myListView() {
+const double cardHeight = 130;
+const double cardItemExtent = 250;
+
+Widget _buildListView() {
   const days = DaysWeek.values;
 
   return SizedBox(
-    height: 130,
+    height: cardHeight,
     child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemExtent: 250,
-        itemCount: days.length,
-        itemBuilder: (context, index) {
-          return Card(
-            color: Colors.red[300],
-            child: ListTile(
-              contentPadding: const EdgeInsets.all(20),
-              title: Text(
-                days[index].name,
-                style: const TextStyle(fontSize: 25, color: Colors.white),
-              ),
-              subtitle: const Text(
-                '15 °C',
-                style: TextStyle(fontSize: 40, color: Colors.white),
-              ),
-              trailing: const Icon(
-                Icons.wb_sunny,
-                color: Colors.white,
-                size: 60,
-              ),
+      scrollDirection: Axis.horizontal,
+      itemExtent: cardItemExtent,
+      itemCount: days.length,
+      itemBuilder: (context, index) {
+        return Card(
+          color: Colors.red[300],
+          child: ListTile(
+            contentPadding: const EdgeInsets.all(20),
+            title: Text(
+              days[index].name,
+              style: const TextStyle(fontSize: 25, color: Colors.white),
             ),
-          );
-        }),
+            subtitle: const Text(
+              '15 °C',
+              style: TextStyle(fontSize: 40, color: Colors.white),
+            ),
+            trailing: const Icon(
+              Icons.wb_sunny,
+              color: Colors.white,
+              size: 60,
+            ),
+          ),
+        );
+      },
+    ),
   );
 }
