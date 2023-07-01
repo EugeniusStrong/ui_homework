@@ -2,18 +2,23 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
 
-const Color kPrimaryColor = Colors.red;
+const TextStyle _basicTextStyle = TextStyle(
+  color: Colors.white,
+  fontSize: 20,
+);
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
+  static const Color _appColorStyle = Colors.red;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: kPrimaryColor,
+        backgroundColor: _appColorStyle,
         appBar: AppBar(
-          backgroundColor: kPrimaryColor,
+          backgroundColor: _appColorStyle,
           title: const Text(
             'Whether forecast',
           ),
@@ -45,10 +50,7 @@ Widget _buildBody() {
             const SizedBox(
               height: 60,
             ),
-            const Text(
-              '7-DAY WEATHER FORECAST',
-              style: TextStyle(fontSize: 20, color: Colors.white),
-            ),
+            const Text('7-DAY WEATHER FORECAST', style: _basicTextStyle),
             const SizedBox(
               height: 20,
             ),
@@ -70,7 +72,7 @@ Row _searchCity() {
       ),
       Text(
         'Enter City Name',
-        style: TextStyle(color: Colors.white, fontSize: 18),
+        style: _basicTextStyle,
       ),
     ],
   );
@@ -88,10 +90,7 @@ Column _cityDetail() {
         style: TextStyle(fontSize: 36, color: Colors.white),
       ),
       Padding(padding: EdgeInsets.only(bottom: 10)),
-      Text(
-        'Friday,  April 28, 2023',
-        style: TextStyle(fontSize: 20, color: Colors.white),
-      )
+      Text('Friday,  April 28, 2023', style: _basicTextStyle),
     ],
   );
 }
@@ -124,10 +123,7 @@ Row _temperatureDetail() {
         ),
         Row(
           children: [
-            Text(
-              'CLEAR',
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            )
+            Text('CLEAR', style: _basicTextStyle),
           ],
         )
       ],
@@ -144,13 +140,7 @@ Row _weatherDetail() {
           size: 30,
           color: Colors.white,
         ),
-        Text(
-          '12',
-          style: TextStyle(
-            fontSize: 20,
-            color: Colors.white,
-          ),
-        ),
+        Text('12', style: _basicTextStyle),
         Text(
           'km/hr',
           style: TextStyle(
@@ -166,13 +156,7 @@ Row _weatherDetail() {
           size: 30,
           color: Colors.white,
         ),
-        Text(
-          '6',
-          style: TextStyle(
-            fontSize: 20,
-            color: Colors.white,
-          ),
-        ),
+        Text('6', style: _basicTextStyle),
         Text(
           '%',
           style: TextStyle(
@@ -188,13 +172,7 @@ Row _weatherDetail() {
           size: 30,
           color: Colors.white,
         ),
-        Text(
-          '56',
-          style: TextStyle(
-            fontSize: 20,
-            color: Colors.white,
-          ),
-        ),
+        Text('56', style: _basicTextStyle),
         Text(
           '%',
           style: TextStyle(
